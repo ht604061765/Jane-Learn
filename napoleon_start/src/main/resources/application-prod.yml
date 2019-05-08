@@ -1,0 +1,22 @@
+server:
+  port: 10100                              #云平台端口，改用独立tomcat后，该配置无效
+  servlet:
+    context-path: /
+platform:
+  id: hengqin                              #平台对应的唯一的标识码，影响文件存储和平台划分
+  name: 横琴移动考勤云服务平台              #平台名称
+  socketPort: 9610                         #实名制socket连接端口
+  socketServer: 119.23.147.62              #实名制socket连接地址
+  cmd:
+    attendance: 842                        #考勤数据提交指令，825：不带考勤地点和图片，842：带考勤地点和图片
+spring:
+  jmx:
+    default-domain: hengqin
+  application:
+    name: hengqin
+  datasource:
+    dbType: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver     #下面这行是配置数据库，这里一定要检查
+    url: jdbc:mysql://rm-wz996cu601s5z6u53.mysql.rds.aliyuncs.com/db_napoleon_hengqin?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT 
+    username: tzroot
+    password: tf_tz_db_1q2w3e

@@ -1,0 +1,27 @@
+
+
+.pageRight1{
+    width: 87%;
+    float: left;
+    height: 100%;
+    padding-top: 72px;
+}
+
+.pageRight .row{
+    margin: 10px 33px;
+    width: 95%;
+}
+.badge{
+    background-color: #ff4642;
+    font-weight: normal;
+    padding: 2px 5px;
+}
+.pointer{
+    cursor:pointer;
+}
+body {
+    background-color: #FFF;
+}
+html,body{
+	height:100%
+} 

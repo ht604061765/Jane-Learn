@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+	<!-- 查询语句 -->
+	<sqltemplate id="selectSql">
+        <![CDATA[
+            select * from　t_zhpt_team
+        ]]>
+	</sqltemplate>
+	<!-- 更新语句 -->
+	<sqltemplate id="updateSql">
+        <![CDATA[
+            update emp set ename='zhangsan'
+        ]]>
+	</sqltemplate>
+	<!-- 删除语句 -->
+	<sqltemplate id="deleteSql">
+        <![CDATA[
+            delete from emp
+        ]]>
+	</sqltemplate>
+</template>

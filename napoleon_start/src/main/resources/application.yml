@@ -1,0 +1,17 @@
+spring:
+  aop:
+    proxy-target-class: true
+  freemarker:
+    allow-request-override: false
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    prefer-file-system-access: false
+    request-context-attribute: request
+  mvc:
+    favicon:
+      enabled: true
+  profiles:
+    active: dev  # prod
+  session:
+    store-type: none
