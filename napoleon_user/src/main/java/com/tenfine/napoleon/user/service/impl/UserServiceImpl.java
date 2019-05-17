@@ -25,7 +25,7 @@ public class UserServiceImpl extends BaseService implements UserService{
 
 
 	private final UserDao dao;
-	
+
 	@Autowired
 	public UserServiceImpl(UserDao dao) {
 		this.dao = dao;
@@ -407,7 +407,38 @@ public class UserServiceImpl extends BaseService implements UserService{
 			}
 		}
 	}
-	
-	
 
+	@Override
+	public List<Usermanagement> getUserMagList() {
+		List<Usermanagement> userM = dao.findPoList(Usermanagement.class);
+		return userM;
+	}
+
+	@Override
+	public List<Usermanagement> getOneUserMagList(String id) {
+		POCondition condition = new POCondition();
+		condition.addEQ("id", id);
+		List<Usermanagement> userM = dao.findPoList(Usermanagement.class,condition);
+		System.out.println(userM);
+		return userM;
+	}
+
+	@Override
+	public Usermanagement addUserM(Usermanagement userM) {
+		userM.setCreateTime(DateUtil.getCurrentDatetime());
+		dao.addPo(userM);
+		return userM;
+	}
+
+	@Override
+	public void delUserM(String id) {
+		dao.deletePo(Usermanagement.class,id);
+	}
+
+	@Override
+	public Usermanagement modifyUserMan(Usermanagement userM) {
+		userM.setCreateTime(DateUtil.getCurrentDatetime());
+		dao.updatePo(userM);
+		return userM;
+	}
 }

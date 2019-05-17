@@ -157,4 +157,31 @@ public interface UserService {
 	 * 模拟所有设备链接
 	 */
 	List<Device> getAllDevice();
+
+	/**
+	 * 查询列表测试
+	 * @return
+	 */
+	List<Usermanagement> getUserMagList();
+
+	/**
+	 * 查询一条数据测试
+	 * @return
+	 */
+	List<Usermanagement> getOneUserMagList(String id);
+
+	/**
+	 * 新增测试
+	 * @return
+	 */
+	Usermanagement addUserM(Usermanagement userM);
+	/**
+	 * 删除测试
+	 */
+	void delUserM(String id);
+
+	/**
+	 * 修改测试
+	 */
+	Usermanagement modifyUserMan(Usermanagement userM);
 }

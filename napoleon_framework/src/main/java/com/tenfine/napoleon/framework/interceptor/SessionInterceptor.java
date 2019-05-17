@@ -16,35 +16,35 @@ public class SessionInterceptor implements HandlerInterceptor{
 	
     // 在请求处理之前进行调用（Controller方法调用之前）
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String currentUri = request.getRequestURI();
-        
-    	logger.info("【Url Match】：" + currentUri);
-    	
-        // 登录不做拦截（登录页面和登录请求和注册请求）
-        String[] loginUris = {"/login", "/loginSubmit", "/regSubmit", "/test", "/error"};
-        for (int i = 0; i < loginUris.length; i++) {
-        	if(currentUri.equals(loginUris[i])){
-        		return true;
-        	}
-		}
-        if(currentUri.contains("/api")){
-    		return true;
-    	}
-        // 验证session是否存在
-        Object obj = SessionUtil.getInstance().getAttribute(SessionConstant.USER_NAME, request.getSession());
-        if (obj == null) {
-             response.sendRedirect("/login");
-             // 解决在框架中跳转登录页的问题
-//            response.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out = response.getWriter();
-//            out.println("<html>");
-//            out.println("<script>");
-//            // out.println("alert('操作超时，请重新登录！');");
-//            out.println("window.open('/login');");
-//            out.println("</script>");
-//            out.println("</html>");
-            return false;
-        }
+//        String currentUri = request.getRequestURI();
+//
+//    	logger.info("【Url Match】：" + currentUri);
+//
+//        // 登录不做拦截（登录页面和登录请求和注册请求）
+//        String[] loginUris = {"/login", "/loginSubmit", "/regSubmit", "/test", "/error"};
+//        for (int i = 0; i < loginUris.length; i++) {
+//        	if(currentUri.equals(loginUris[i])){
+//        		return true;
+//        	}
+//		}
+//        if(currentUri.contains("/api")){
+//    		return true;
+//    	}
+//        // 验证session是否存在
+//        Object obj = SessionUtil.getInstance().getAttribute(SessionConstant.USER_NAME, request.getSession());
+//        if (obj == null) {
+//             response.sendRedirect("/login");
+//             // 解决在框架中跳转登录页的问题
+////            response.setContentType("text/html; charset=UTF-8");
+////            PrintWriter out = response.getWriter();
+////            out.println("<html>");
+////            out.println("<script>");
+////            // out.println("alert('操作超时，请重新登录！');");
+////            out.println("window.open('/login');");
+////            out.println("</script>");
+////            out.println("</html>");
+//            return true;
+//        }
         return true;
     }
 
