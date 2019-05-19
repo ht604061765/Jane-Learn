@@ -10,6 +10,7 @@ import com.tenfine.napoleon.user.dao.UserDao;
 import com.tenfine.napoleon.user.dao.po.*;
 import com.tenfine.napoleon.user.service.UserService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -415,12 +416,14 @@ public class UserServiceImpl extends BaseService implements UserService{
 	}
 
 	@Override
-	public List<Usermanagement> getOneUserMagList(String id) {
+	public Usermanagement getOneUserMagList(String id) {
 		POCondition condition = new POCondition();
 		condition.addEQ("id", id);
-		List<Usermanagement> userM = dao.findPoList(Usermanagement.class,condition);
-		System.out.println(userM);
-		return userM;
+		List<Usermanagement> usermanagements = dao.findPoList(Usermanagement.class, condition);
+		if (usermanagements.size() == 1){
+			return usermanagements.get(0);
+		}
+		return null;
 	}
 
 	@Override
@@ -428,6 +431,13 @@ public class UserServiceImpl extends BaseService implements UserService{
 		userM.setCreateTime(DateUtil.getCurrentDatetime());
 		dao.addPo(userM);
 		return userM;
+	}
+
+	@Override
+	public Usermanagement updateUserM(Usermanagement userOneM) {
+		userOneM.setCreateTime(DateUtil.getCurrentDatetime());
+		dao.updatePo(userOneM);
+		return userOneM;
 	}
 
 	@Override

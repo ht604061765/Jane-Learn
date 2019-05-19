@@ -19,4 +19,4 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver #下面这行是配置数据库，这里一定要检查
     url: jdbc:mysql://localhost:3306/jane_learn?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&userSSL=true
     username: root
-    password: jane
+    password: password

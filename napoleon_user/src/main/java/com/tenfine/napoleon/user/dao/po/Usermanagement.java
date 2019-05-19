@@ -1,8 +1,12 @@
 package com.tenfine.napoleon.user.dao.po;
 
+import com.tenfine.napoleon.framework.annotation.Entity;
 import com.tenfine.napoleon.framework.bean.BasePO;
 
+@Entity
 public class Usermanagement extends BasePO {
+    private static final long serialVersionUID = -6926887442283591714L;
+
     private String username; //用户名称
     private String phone; //手机号码
     private String account; //用户账号
@@ -10,6 +14,15 @@ public class Usermanagement extends BasePO {
     private String sex; //性别
     private String remark; //备注
     private String job; //职业
+    private String orgId; //orgId
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
 
     public String getUsername() {
         return username;

@@ -10,8 +10,7 @@ import com.tenfine.napoleon.user.dao.po.Usermanagement;
 import com.tenfine.napoleon.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,6 @@ public class JaneController extends BaseController {
     @RequestMapping("/submitUserM")
     @ResponseBody
     public Result<String> addUserM(Usermanagement userM) {
-        System.out.println(userM.getUsername() + userM.getPassword());
         userService.addUserM(userM);
         return Result.success("Congratulations!");
     }
@@ -66,9 +64,10 @@ public class JaneController extends BaseController {
      */
     @RequestMapping("/userManage")
     public ModelAndView userManage() {
+        System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!");
         ModelAndView mv = new ModelAndView("userInfo");
         List<Usermanagement> userM = userService.getUserMagList();
-        mv.addObject("uList", userM);
+        mv.addObject("userM", userM);
         return mv;
     }
 
@@ -76,12 +75,25 @@ public class JaneController extends BaseController {
      * 查询用户其中一条信息
      */
     @RequestMapping("/queryOneUserMan")
-    public ModelAndView userOneManage(String id) {
-        System.out.println(id);
+    public ModelAndView userOneManage(@PathVariable("id") String id) {
         ModelAndView mv = new ModelAndView("userInfo");
-        List<Usermanagement> userM = userService.getOneUserMagList(id);
-        mv.addObject("uList", userM);
-        mv.addObject("userOneM",userM);
+        List<Usermanagement> userM = userService.getUserMagList();
+        Usermanagement user =  userService.getOneUserMagList(id);
+        mv.addObject("userM", userM);
+        mv.addObject("userOneM",user);
+        return mv;
+    }
+
+    /**
+     * 修改Jane
+     */
+    @RequestMapping("/modelModifyJane")
+    public ModelAndView modelModifyJane(String id) {
+        ModelAndView mv = new ModelAndView("modelModifyJane");
+        List<Usermanagement> userM = userService.getUserMagList();
+        Usermanagement user =  userService.getOneUserMagList(id);
+        mv.addObject("userM", userM);
+        mv.addObject("userOneM",user);
         return mv;
     }
 
@@ -96,15 +108,14 @@ public class JaneController extends BaseController {
         return Result.success("Congratulations to delete!");
     }
 
-//    /**
-//     * 修改用户信息
-//     */
-//    @RequestMapping("/modifyUserMan")
-//    @ResponseBody
-//    public Result<String> modifyUserMan(String id) {
-//        System.out.println(id);
-//        userService.modifyUserMan(id);
-//        return Result.success("Congratulations to delete!");
-//    }
+   /**
+    * 修改用户信息
+    */
+    @RequestMapping("/modifyUserInfo")
+    @ResponseBody
+    public Result<String> modifyUserMan(Usermanagement userOneM) {
+        userService.updateUserM(userOneM);
+        return Result.success("Congratulations!");
+    }
 }
 

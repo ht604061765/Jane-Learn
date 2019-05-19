@@ -264,9 +264,9 @@ public class UserController extends BaseController{
 	/**
      * 添加用户模态框
      */
-	@RequestMapping("/modelAddUser")
-    public String modelAddUser() {
-		return "modelAddUser";
+	@RequestMapping("/modifyJane")
+    public String modifyJane() {
+		return "modifyJane";
     }
 	
 	/**
