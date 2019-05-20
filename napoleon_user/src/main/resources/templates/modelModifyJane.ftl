@@ -15,6 +15,7 @@
 					密码：<input type="password" name="password" value='${(userOneM.password)!''}'></input>
 					职业：<input type="text" name="job" value='${(userOneM.job)!''}'></input>
 					备注：<input type="text" name="remark" value='${(userOneM.remark)!''}'></input>
+					orgId:<input type="text" name="orgId" value='${(userOneM.orgId)!''}'></input>
 				</div>
 			</form>
 	    </div>

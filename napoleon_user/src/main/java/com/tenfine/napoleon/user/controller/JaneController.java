@@ -3,10 +3,7 @@ package com.tenfine.napoleon.user.controller;
 import com.tenfine.napoleon.framework.bean.BaseController;
 import com.tenfine.napoleon.framework.bean.Result;
 import com.tenfine.napoleon.framework.util.PlatfromProperties;
-import com.tenfine.napoleon.user.dao.po.Jane;
-import com.tenfine.napoleon.user.dao.po.PersonInfo;
-import com.tenfine.napoleon.user.dao.po.User;
-import com.tenfine.napoleon.user.dao.po.Usermanagement;
+import com.tenfine.napoleon.user.dao.po.*;
 import com.tenfine.napoleon.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +17,11 @@ import java.util.List;
 public class JaneController extends BaseController {
     @Autowired
     private UserService userService;
+
+    @RequestMapping("/menu")
+    public String index() {
+        return "menu";
+    }
 
     @RequestMapping("/submitTest")
     @ResponseBody
@@ -95,6 +97,33 @@ public class JaneController extends BaseController {
         mv.addObject("userM", userM);
         mv.addObject("userOneM",user);
         return mv;
+    }
+
+    /**
+     * 打开整个ORG列表
+     */
+    @RequestMapping("/modelConnectOrg")
+    public ModelAndView modelconnectOrg(String id) {
+        ModelAndView mv = new ModelAndView("modelconnectOrg");
+        List<Usermanagement> userM = userService.getUserMagList();
+        List<Orglist> org =  userService.getOrgList();
+        Usermanagement user =  userService.getOneUserMagList(id);
+        mv.addObject("userM", userM);
+        mv.addObject("orgM",org);
+        mv.addObject("userOneM",user);
+        return mv;
+    }
+
+    /**
+     * 关联ORG
+     */
+    @RequestMapping("/connectOrg")
+    @ResponseBody
+    public Result<String> addConnectOrg(String orgId,String id) {
+        Usermanagement user =  userService.getOneUserMagList(id);
+        user.setOrgId(orgId);
+        userService.updateUserM(user);
+        return Result.success("Congratulations!");
     }
 
     /**

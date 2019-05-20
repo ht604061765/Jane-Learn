@@ -159,10 +159,16 @@ public interface UserService {
 	List<Device> getAllDevice();
 
 	/**
-	 * 查询列表测试
+	 * 查询用户列表测试
 	 * @return
 	 */
 	List<Usermanagement> getUserMagList();
+
+	/**
+	 * 查询机构列表测试
+	 * @return
+	 */
+	List<Orglist> getOrgList();
 
 	/**
 	 * 查询一条数据测试

@@ -41,19 +41,19 @@
             </tr>
             <#list userM as user>
                 <tr>
-                    <td>${user.id}</td>
-                    <td>${user.username}</td>
-                    <td>${user.password}</td>
-                    <td>${user.createTime}</td>
-                    <td>${user.sex}</td>
-                    <td>${user.phone}</td>
-                    <td>${user.job}</td>
-                    <td>${user.account}</td>
-                    <td>${user.remark}</td>
+                    <td>${(user.id)!''}</td>
+                    <td>${(user.username)!''}</td>
+                    <td>${(user.password)!''}</td>
+                    <td>${(user.createTime)!''}</td>
+                    <td>${(user.sex)!''}</td>
+                    <td>${(user.phone)!''}</td>
+                    <td>${(user.job)!''}</td>
+                    <td>${(user.account)!''}</td>
+                    <td>${(user.remark)!''}</td>
                     <td>${(user.orgId)!''}</td>
                     <td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="modifyqa('${user.id}')">编辑</button></td>
                     <td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="deleteqa('${user.id}')">删除</button></td>
-                    <td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="deleteqa('${user.id}')">关联机构</button></td>
+                    <td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="connectqa('${user.id}')">关联机构</button></td>
                 </tr>
             </#list>
         </table>
@@ -61,6 +61,9 @@
 
     <!-- 修改用户模态窗口 -->
     <div id="modelModifyJane" class="modelModifyJane modal fade" tabindex="-1" role="dialog"></div>
+
+    <!-- 关联机构模态窗口 -->
+    <div id="modelConnectOrg" class="modelConnectOrg modal fade" tabindex="-1" role="dialog"></div>
 <script>
     deleteqa = function(id) {
         var data = "id=" + id;
@@ -91,6 +94,25 @@
                 $('.modelModifyJane').modal('show')
             },
             error: function(request) {
+                alert("异步请求失败");
+            },
+        });
+    }
+    connectqa = function(id){
+        var paramData = {
+            id : id
+        }
+        $.ajax({
+            type: "POST",
+            url: "/modelConnectOrg",
+            data: paramData,
+            success: function(data) {
+                $(".modelConnectOrg").empty();
+                $('.modelConnectOrg').append(data);
+                $('.modelConnectOrg').modal('show');
+            },
+            error: function(request) {
+                alert(id);
                 alert("异步请求失败");
             },
         });
