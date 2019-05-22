@@ -171,6 +171,12 @@ public interface UserService {
 	List<Orglist> getOrgList();
 
 	/**
+	 * 通过机构ID查询用户列表测试
+	 * @return
+	 */
+	List<Usermanagement> getUserMagListByOrgId(String orgId);
+
+	/**
 	 * 查询一条数据测试
 	 * @return
 	 */

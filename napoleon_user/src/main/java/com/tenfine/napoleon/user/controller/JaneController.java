@@ -3,6 +3,7 @@ package com.tenfine.napoleon.user.controller;
 import com.tenfine.napoleon.framework.bean.BaseController;
 import com.tenfine.napoleon.framework.bean.Result;
 import com.tenfine.napoleon.framework.util.PlatfromProperties;
+import com.tenfine.napoleon.framework.util.StringUtil;
 import com.tenfine.napoleon.user.dao.po.*;
 import com.tenfine.napoleon.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -145,6 +147,22 @@ public class JaneController extends BaseController {
     public Result<String> modifyUserMan(Usermanagement userOneM) {
         userService.updateUserM(userOneM);
         return Result.success("Congratulations!");
+    }
+
+    /**
+     * 加载机构用户主界面
+     */
+    @RequestMapping("/orgQueryUser")
+    public ModelAndView loadOrgUser(String id) {
+        ModelAndView mv = new ModelAndView("orgQueryUser");
+        List<Orglist> orgL = userService.getOrgList();
+        List<Usermanagement> userM =new ArrayList<>();
+        if (StringUtil.isNotEmpty(id)){
+            userM = userService.getUserMagListByOrgId(id);
+        }
+        mv.addObject("orgL",orgL);
+        mv.addObject("userM",userM);
+        return mv;
     }
 }
 

@@ -417,8 +417,16 @@ public class UserServiceImpl extends BaseService implements UserService{
 
 	@Override
 	public List<Orglist> getOrgList() {
-		List<Orglist> orgM = dao.findPoList(Orglist.class);
-		return orgM;
+		List<Orglist> orgL = dao.findPoList(Orglist.class);
+		return orgL;
+	}
+
+	@Override
+	public List<Usermanagement> getUserMagListByOrgId(String orgId) {
+		POCondition condition = new POCondition();
+		condition.addEQ("orgId", orgId);
+		List<Usermanagement> userMO = dao.findPoList(Usermanagement.class,condition);
+		return userMO;
 	}
 
 	@Override

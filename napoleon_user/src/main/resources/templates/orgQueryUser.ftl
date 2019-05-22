@@ -1,25 +1,29 @@
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-	    <div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">关联机构</h4>
-	    </div>
-	    <div class="modal-body">
-			<table style="text-align:center;FONT-SIZE: 11pt; WIDTH: 600px; FONT-FAMILY: 宋体; BORDER-COLLAPSE: collapse" borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1>
+<!doctype html>
+<html lang="zh-cn" xmlns="">
+<head>
+	<title>用户管理</title>
+	<#include "basic.ftl">
+</head>
+
+<body>
+<div class="" role="document">
+    <div class="">
+	    <div class="">
+			<table style="text-align:center;FONT-SIZE: 11pt; WIDTH: 600px; FONT-FAMILY: 宋体; BORDER-COLLAPSE: collapse" borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1 id = 'orgList'>
 				<tr>
 					<td><b>id</b></td>
 					<td><b>orgname</b></td>
 					<td><b>查询</b></td>
 				</tr>
-				<#list orgM as org>
+				<#list orgL as org>
 					<tr>
 						<td>${(org.id)!''}</td>
 						<td>${(org.orgname)!''}</td>
-						<td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="confirm('${org.id}')">查询</button></td>
+						<td><button type="button" class="btn btn-danger btn-sm addDevice" onclick="search('${org.id}')">查询</button></td>
 					</tr>
 				</#list>
 			</table>
-			<table style="text-align:center;FONT-SIZE: 11pt; WIDTH: 600px; FONT-FAMILY: 宋体; BORDER-COLLAPSE: collapse" borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1>
+			<table style="text-align:center;FONT-SIZE: 11pt; WIDTH: 600px; FONT-FAMILY: 宋体; BORDER-COLLAPSE: collapse" borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1 id="userList">
 				<tr>
 					<td><b>id</b></td>
 					<td><b>username</b></td>
@@ -48,20 +52,20 @@
 				</#list>
 			</table>
 	    </div>
-
+</body>
 <script>
-	confirm = function(orgId,userId) {
+	search = function(id) {
 		var paramData = {
-			orgId:orgId,
-			id:userId
-
+			id: id
 		}
 		$.ajax({
 			type: "POST",
-			url: "/connectOrg",
+			url: "/orgQueryUser",
 			data: paramData,
 			success: function (data) {
-				window.location.reload("/userManage");
+				$("#userList").empty();
+				$('#userList').append(data)
+				$('#orgList').hide()
 			},
 			error: function (data) {
 				alert(id);
